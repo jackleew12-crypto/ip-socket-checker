@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IP & Socket Checker</title>
+<style>
+ * {
+ box-sizing: border-box;
+ }
+ body {
+ font-family: 'Poppins', sans-serif;
+ background: linear-gradient(135deg, #001f3f, #0074d9);
+ color: #fff;
+ height: 100vh;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin: 0;
+ }
+ .container {
+ background: rgba(255, 255, 255, 0.1);
+ padding: 40px;
+ border-radius: 16px;
+ box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+ text-align: center;
+ width: 350px;
+ backdrop-filter: blur(10px);
+ }
+ h1 {
+ font-size: 24px;
+ margin-bottom: 20px;
+ }
+ input {
+ width: 100%;
+ padding: 12px;
+ margin: 8px 0;
+ border: none;
+ border-radius: 8px;
+ outline: none;
+ font-size: 16px;
+ }
+ input:focus {
+ border: 2px solid #00ccff;
+ }
+ button {
+ width: 100%;
+ padding: 12px;
+ background-color: #00ccff;
+ color: #fff;
+ border: none;
+ border-radius: 8px;
+ font-size: 16px;
+ cursor: pointer;
+ margin-top: 10px;
+ transition: background 0.3s;
+ }
+ button:hover {
+ background-color: #00aaff;
+ }
+ #result {
+ margin-top: 20px;
+ font-size: 18px;
+ font-weight: 500;
+ }
+ .alive {
+ color: #00ff99;
+ }
+ .dead {
+ color: #ff4444;
+ }
+</style>
+</head>
+<body>
+ <div class="container">
+ <h1>IP / Socket Checker</h1>
+ <input type="text" id="ip" placeholder="Enter IP address (e.g. 8.8.8.8)" />
+ <input type="number" id="port" placeholder="Enter port (e.g. 80)" />
+ <button onclick="checkStatus()">Check Status</button>
+ <div id="result"></div>
+ </div>
+
+ <script>
+ async function checkStatus() {
+ const ip = document.getElementById('ip').value.trim();
+ const port = document.getElementById('port').value.trim();
+ const result = document.getElementById('result');
+
+ if (!ip || !port) {
+ result.innerHTML = '⚠️ Please enter both IP and Port';
+ result.className = '';
+ return;
+ }
+
+ result.innerHTML = '⏳ Checking...';
+ result.className = '';
+
+ // Simulated result (use backend API for real check)
+ setTimeout(() => {
+ const isAlive = Math.random() > 0.5; // random demo result
+ if (isAlive) {
+ result.innerHTML = `✅ ${ip}:${port} is <span class='alive'>Alive</span>`;
+ } else {
+ result.innerHTML = `❌ ${ip}:${port} is <span class='dead'>Dead</span>`;
+ }
+ }, 1500);
+ }
+ </script>
+</body>
+</html>
